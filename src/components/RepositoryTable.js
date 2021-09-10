@@ -1,26 +1,8 @@
 import React, { Component } from 'react';
 import MaterialTable from 'material-table'
 import {CastByteToNumber} from '../helpers.js'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
-import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableRow from '@material-ui/core/TableRow';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Button, Table, TableRow, TableCell, TableContainer, TableHead, TablePagination, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip, FormControlLabel, Switch } from'@material-ui/core'
+import {DeleteIcon, FilterList, Cancel, CheckCircleIcon} from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -89,7 +71,8 @@ class RepositoryTable extends Component {
         <div>
             <MaterialTable
               title={"Book Market"}
-              data={this.state.items}
+              data=fetch('https://api.github.com/users/hacktivist123/repos')
+  .then(response => response.json());
               columns={columns}
               options={options}
               onRowClick={this.onClick}
