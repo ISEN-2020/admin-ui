@@ -1,11 +1,10 @@
-name: Build App
+name: Frequent App Build
 
 on:
     push:
         branches:
-        - master
         - develop
-        - feature/data-tabs
+        - feature/*
 
 jobs:
     build:
@@ -33,21 +32,6 @@ jobs:
           #env:
             #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    owasp:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Install NPM dependencies
-          run: |
-            npm install --production --unsafe-perm
-        - uses: sburris/dependency-check-action@master
-          with:
-            Project-Name: TestApp
-        - name: Archive dependency check reports
-          uses: actions/upload-artifact@v1
-          with:
-            name: reports
-            path: reports
     trivy:
         runs-on: ubuntu-latest
         steps:
