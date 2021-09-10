@@ -134,6 +134,23 @@ class ManifestCard extends React.Component {
       console.log(e);
     });
   }
+  
+  returnBook = () => {
+    console.log(this.state.book);
+    this.props.returnBookTrigger(this.state.book);
+    var book = this.state.book.bookname;
+    var name = this.state.book.bookauteur;
+    var email = localStorage.getItem("email");
+    axios.post("http://isen-library.3r1.co:8001/saveLend", {
+      book,
+      name,
+      email
+    }).then(result => {
+      console.log(result);
+    }).catch(e => {
+      console.log(e);
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -169,6 +186,9 @@ class ManifestCard extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse>
         <Grid container justify ="flex-end">
+		<Button variant="contained" color="primary" onClick={this.returnBook}>
+                Return
+            </Button>
             <Button variant="contained" color="primary" onClick={this.lendBook}>
                 Lend
             </Button>
