@@ -41,7 +41,7 @@ const NavBar = () => {
                     <Grid item xs={9}>
                         <Toolbar>
                             <Typography variant="title" color="inherit">
-                            Lending Service
+                            Admin Service
                             </Typography>
                         </Toolbar>
                     </Grid>
