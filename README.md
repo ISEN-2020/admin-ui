@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##  Things you need to know
+
+Admin has one and only one user (No choice to choose your own address). For safety, password is defined in the raw code. Thereafter it can be modified and defined by the user or be changed with each use to allow maximum security.
+
 ## Available Scripts
 
 In the project directory, you can run:
