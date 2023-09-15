@@ -82,84 +82,48 @@ export default function SignUp() {
     })}
     */
     }
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        
-        {/* Icone du cadenas */}
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        
-
-        {/* Texte "sign up" */}
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-
-        <form className={classes.form} noValidate>
-          {/* Creation d'une grille */}
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={event => setEmail(event.target.value)}
-              />
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          {/* Icone du cadenas */}
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          {/* Texte "sign up" */}
+          <Typography component="h1" variant="h5">
+            Admin Login
+          </Typography>
+          <form className={classes.form} noValidate>
+            {/* Password input field */}
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={event => setPassword(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={routeChange}
+                >
+                  Log In
+                </Button>
+              </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={event => setPassword(event.target.value)}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={routeChange}
-              >
-                Sign Up
-              </Button>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography component="h1" variant="h5" align="center">
-                Or
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={routeChange2}
-              >
-                Register
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
-  );
-}
+          </form>
+        </div>
+      </Container>
+    );
+  }
