@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var error= ""
 export default function SignUp() {
   const classes = useStyles();
 
@@ -58,30 +59,19 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
 
   const routeChange = () => { 
-    // Check if the email and password match the criteria
-    if (password === "powner") {
+   // event.preventDefault(); //Security
+    // Check if the password matches the admin password
+    if (password === "1234") {
       let path = `/composant_1`; 
-      history.push(path);
-      console.log(password);
-      history.push(path);
+     console.log(password);
+     history.push(path);
     } else {
       // Handle incorrect credentials here, e.g., show an error message
       console.log("Incorrect credentials");
-      //toast.error('Incorrect credentials. Please try again.');
+      error = "bad password, try again";
     }
   }
   
-  const routeChange2 = () =>{ 
-    let path = `/composant_2`;
-    history.push(path);
-    //send information
-    /*
-    axios.post("https://www.somePlace.com/auth/login", {
-      this.refs.emailID.getValue(),
-      this.refs.passwordID.getValue()
-    })}
-    */
-    }
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -116,11 +106,14 @@ export default function SignUp() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={routeChange}
+                  onClick={(event) => routeChange(event)} // Passer event comme argument
                 >
                   Log In
                 </Button>
               </Grid>
+              <p style={{textAlign: 'center', color: 'red', fontSize: '16px'}}>
+                {error}
+              </p>
             </Grid>
           </form>
         </div>

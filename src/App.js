@@ -35,7 +35,6 @@ class App extends Component {
                 <div>
                 <Route exact path="/" component={SignUp} />
                 <Route path="/composant_1" component={MainView} />
-                <Route path="/composant_2" component={Register} />
                 </div>
             </Router>
         );

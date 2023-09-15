@@ -63,7 +63,6 @@ const NavBar = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                        <MenuItem onClick={routeChange2}>Delete account</MenuItem>
                         <MenuItem onClick={routeChange}>Log out</MenuItem>
                         </Menu>
                     </Grid>

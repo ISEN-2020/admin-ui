@@ -25,78 +25,61 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 
-const columns=[
-    { title: 'Name', field: 'name' },
-    { title: 'Author', field: 'author'},
+function RepositoryTable() {
+  const { useState } = React;
 
-    { title: 'Description', field: 'description', render: rowData => {
-            return (rowData.description) ? rowData.description : 'No description available :('
-        }
-    },
+  const [columns, setColumns] = useState([
+    { title: 'Name', field: 'bookname' },
+    { title: 'Autor', field: 'bookauteur'},
     { title: 'Available', field: 'bookavailable', render: rowData => {
         return (rowData.bookavailable) ? <CheckCircleIcon /> : <CancelIcon />
         } 
     }
-]
+  ]);
 
+  const [data, setData] = useState([
+    {bookname: 'toto', bookauteur: 'Maxime K', bookpublication: '19/06/2020', bookavailable: true},
+    {bookname: 'toto2', bookauteur: 'Budimir U',bookpublication: '19/06/2020', bookavailable: false}
+  ]);
 
-const options = {
-    pageSize: 5
-};
+  return (
+    <MaterialTable
+      title="Book List"
+      columns={columns}
+      data={data}
+      editable={{
+        onRowAdd: newData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              setData([...data, newData]);
+              
+              resolve();
+            }, 1000)
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataUpdate = [...data];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newData;
+              setData([...dataUpdate]);
 
-class RepositoryTable extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            books: []
-        };
-        this.onClick = props.onClick
-    }
-
-    componentDidMount() {
-
-         fetch("https://ce8b85ed-51fc-4f57-8847-f299b21ac507.mock.pstmn.io/getBooks")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        books: result.books
-                    });
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-    }
-
-  render() {
-    return (
-        <div>
-            <MaterialTable
-              title={"Book Market"}
-              data={this.state.books}
-              columns={columns}
-              options={options}
-              onRowClick={this.onClick}
-              localization={{
-                body: {
-                    emptyDataSourceMessage: 'Loading book market...',
-                },
-                }}
-            />
-        </div>
-    );
-  }
-
-  }
+              resolve();
+            }, 1000)
+          }),
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataDelete = [...data];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setData([...dataDelete]);
+              
+              resolve()
+            }, 1000)
+          }),
+      }}
+    />
+  )
+}
   export default RepositoryTable

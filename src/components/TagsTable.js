@@ -1,91 +1,59 @@
 import React, { Component } from 'react';
 import MaterialTable from 'material-table'
 import {CastByteToNumber} from '../helpers.js'
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import CancelIcon from "@material-ui/icons/Cancel";
 
-const columns=[
-    { title: 'Name', field: 'name' },
-    { title: 'Author', field: 'author'},
-    { title: 'Publish date', field: 'publishDate'}
-]
+function TagsTable() {
+  const { useState } = React;
 
-const options = {
-    pageSize: 5
-};
+  const [columns, setColumns] = useState([
+    { title: 'Name', field: 'userName' },
+    { title: 'Email', field: 'userEmail'},
+    { title: 'password', field: 'userPassword'}
+  ]);
 
-class TagsTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: [],
-        };
-        this.onClick = props.onClick
-    }
+  const [data, setData] = useState([
+    {userName: 'toto1', userEmail: 'toto1@test.fr', userPassword: 'password1'},
+    {userName: 'toto2', userEmail: 'toto2@test.fr', userPassword: 'password2'}
+  ]);
 
-    lendBook(book) {
-        this.setState({
-            isLoaded: true,
-            items: this.state.items.concat([book])
-        });
-	}
+  return (
+    <MaterialTable
+      title="User List"
+      columns={columns}
+      data={data}
+      editable={{
+        onRowAdd: newData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              setData([...data, newData]);
+              
+              resolve();
+            }, 1000)
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataUpdate = [...data];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newData;
+              setData([...dataUpdate]);
 
-    setRepo(repo) {
-
-        this.setState({
-            isLoaded: false,
-            items: []
-        });
-
-        if (sessionStorage.getItem(repo)) {
-            console.log(sessionStorage.getItem(repo))
-            this.updateTags(JSON.parse(sessionStorage.getItem(repo)))
-        } else {
-            fetch(`/api/tags/${repo}`)
-                .then(res => res.json())
-                .then((result) => {
-                    this.updateTags(result)
-                    try {
-                        sessionStorage.setItem(repo, JSON.stringify(result))
-                    }catch(e) {}
-                },
-                (error) => {
-                    this.setState({
-                    isLoaded: true,
-                    error
-                });
-                }
-            )
-        }
-    }
-
-    updateTags(tags) {
-        this.setState({
-            isLoaded: true,
-            items: tags.tags
-        });
-        if(tags.tags.length === 1) {
-            this.onClick(null, tags.tags[0])
-        }
-    }
-
-    render() {
-        return (
-            <MaterialTable
-              title={"Borrowed Books"}
-              data={this.state.items}
-              columns={columns}
-              options={options}
-              onRowClick={this.onClick}
-              localization={{
-                body: {
-                    emptyDataSourceMessage: 'No books ordred.',
-                },
-                }}
-            />
-        );
-    }
-  }
+              resolve();
+            }, 1000)
+          }),
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataDelete = [...data];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setData([...dataDelete]);
+              
+              resolve()
+            }, 1000)
+          }),
+      }}
+    />
+  )
+}
   export default TagsTable
