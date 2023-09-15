@@ -51,8 +51,9 @@ class ManifestCard extends React.Component {
             manifest: null,
             expanded: false,
             cardHeader: "bookname",
-            size: "author",
+            author: "author",
             date: "dd/mm/yyyy",
+            bookdescription: "bookdescription",
             anchorEl: null,
             notificationOpen: false
         };
@@ -110,9 +111,10 @@ class ManifestCard extends React.Component {
     )
 
     this.setState(() => ({
-        cardHeader: tag.bookname,
-        size: tag.bookauteur,
-        date: tag.bookpublication,
+        cardHeader: tag.name,
+        author: tag.author,
+        date: tag.publishDate,
+        bookdescription: tag.description,
         book: tag
     }));
 
@@ -121,23 +123,6 @@ class ManifestCard extends React.Component {
   lendBook = () => {
     console.log(this.state.book);
     this.props.lendBookTrigger(this.state.book);
-    var book = this.state.book.bookname;
-    var name = this.state.book.bookauteur;
-    var email = localStorage.getItem("email");
-    axios.post("http://isen-library.3r1.co:8001/saveLend", {
-      book,
-      name,
-      email
-    }).then(result => {
-      console.log(result);
-    }).catch(e => {
-      console.log(e);
-    });
-  }
-  
-  returnBook = () => {
-    console.log(this.state.book);
-    this.props.returnBookTrigger(this.state.book);
     var book = this.state.book.bookname;
     var name = this.state.book.bookauteur;
     var email = localStorage.getItem("email");
@@ -165,30 +150,36 @@ class ManifestCard extends React.Component {
               {this.state.cardHeader.substring(0, 1).toUpperCase()}
             </Avatar>
           }
-          title={this.state.cardHeader}
-          subheader={this.state.size} >
+          title={"Book title : " + this.state.cardHeader}
+          subheader={"Author : " + this.state.author} >
         </CardHeader>
-        <Typography variant="body2" component="p">
-            {this.state.date}
-          </Typography>
+
         <CardContent>
-        <Typography paragraph>
-        {!this.state.isLoaded && (
-          <Grid container justify = "center">
-            <CircularProgress />
-          </Grid>
-        )}
-        { this.state.manifest != null ? <ReactJson src={this.state.manifest} /> : null }
-        </Typography>
+
+
+            <Typography variant="body2" component="p" >
+                {"Publication date : " + this.state.date}
+            </Typography>
+
+            <Typography paragraph >
+            {!this.state.isLoaded && (
+              <Grid container justify = "center">
+                <CircularProgress />
+              </Grid>
+            )}
+            { this.state.manifest != null ? <ReactJson src={this.state.manifest} /> : null }
+                {this.state.bookdescription}
+
+            </Typography>
+
+
         </CardContent>
+
         <CardActions className={classes.actions} disableActionSpacing>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse>
         <Grid container justify ="flex-end">
-		<Button variant="contained" color="primary" onClick={this.returnBook}>
-                Return
-            </Button>
             <Button variant="contained" color="primary" onClick={this.lendBook}>
                 Lend
             </Button>

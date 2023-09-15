@@ -9,7 +9,7 @@ import Register from './components/Register';
 import MainView from './components/MainView.js';
 
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-
+import {getAllUsers, createUser} from './services/UserManagement/userManagementService'
 import 'typeface-roboto';
 
 class App extends Component {
@@ -28,7 +28,8 @@ class App extends Component {
         this.manifestCard.current.setManifest(rowData)
     }
 
-    render() {
+
+        render() {
         return(
             <Router>
                 <div>

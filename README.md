@@ -66,3 +66,155 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## API Response expected from BookManagement
+
+### Method : GET `https../api/getBooks`
+
+```json 
+{
+  "books": [
+    {
+      "name": "La vie de Clowish",
+      "author": "toto",
+      "book_type": "xxx",
+      "description": "Clovis la pute",
+      "publishDate": "27/01/2000",
+      "quantity": 1
+    },
+    {
+      "name": "ThomasLPB",
+      "author": "toto",
+      "book_type": "xxx",
+      "description": "Thomas la chienne",
+      "publishDate": "25/05/2018",
+      "quantity": 2
+    },
+    {
+      "name": "Corentin le lapin",
+      "author": "toto",
+      "book_type": "xxx",
+      "description": "Le petit lapin de Corentin",
+      "publishDate": "19/08/2016",
+      "quantity": 3
+    }
+  ]
+}
+```
+
+## API request for bookManagement
+
+### Method : POST `https../api/addBook`
+
+```json
+{
+  "book": {
+    "name": "La vie de Clowish",
+    "author": "toto",
+    "book_type": "xxx",
+    "description": "Clovis la pute",
+    "publishDate": "27/01/2000",
+    "quantity": 3
+  }
+}
+```
+
+### Method : PUT `https../api/updateBook`
+
+```json
+{
+  "book": {
+    "name": "La vie de Clowish",
+    "author": "toto",
+    "book_type": "xxx",
+    "description": "Clovis la pute",
+    "publishDate": "27/01/2000",
+    "quantity": 2
+  }
+}
+```
+
+### Method : DELETE `https../api/deleteBook`
+
+```json
+{
+  "book": {
+    "name": "La vie de Clowish",
+    "author": "toto",
+    "book_type": "xxx",
+    "description": "Clovis la pute",
+    "publishDate": "27/01/2000",
+    "quantity": 1
+  }
+}
+```
+## API request for Lending Management
+
+### Method : POST `https../api/lendBook`
+
+```json
+{
+  "book": {
+    "name": "La vie de Clowish",
+    "author": "toto",
+    "book_type": "xxx",
+    "description": "Clovis la pute",
+    "publishDate": "27/01/2000",
+    "quantity": 3,
+    "rentDate": "09/09/2022",
+    "rentalExpirationDate": "20/09/2022"
+  }
+}
+```
+
+### Method : DELETE `https../api/returnBook`
+
+```json
+{
+  "book": {
+    "name": "La vie de Clowish",
+    "author": "toto",
+    "book_type": "xxx",
+    "description": "Clovis la pute",
+    "publishDate": "27/01/2000",
+    "quantity": 3,
+    "rentDate": "09/09/2022",
+    "rentalExpirationDate": "20/09/2022"
+  }
+}
+```
+
+## API request for User Management
+
+### Method : POST `https../api/register`
+
+```json
+{
+  "user": {
+    "username": "Clovis",
+    "password": "toto"
+  }
+}
+```
+
+### Method : GET `https../api/login`
+
+```json
+{
+  "user": {
+    "username": "Clovis",
+    "password": "toto"
+  }
+}
+```
+
+### Method : DELETE `https../api/delete`
+
+```json
+{
+  "user": {
+    "username": "Clovis",
+    "password": "toto"
+  }
+}
+```
