@@ -1,47 +1,37 @@
-const API_URL = 'http://localhost:3000/api/books';
+const apiUrl = 'http://localhost:5000/api';
 
 const bookService = {
   getBooks: async () => {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${apiUrl}/books`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     return response.json();
   },
   addBook: async (newBook) => {
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${apiUrl}/books`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newBook),
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
     return response.json();
   },
   updateBook: async (updatedBook) => {
-    const response = await fetch(`${API_URL}/${updatedBook.id}`, {
+    const response = await fetch(`${apiUrl}/books/${updatedBook.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(updatedBook),
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
     return response.json();
   },
-  deleteBook: async (bookId) => {
-    const response = await fetch(`${API_URL}/${bookId}`, {
+  deleteBook: async (id) => {
+    await fetch(`${apiUrl}/books/${id}`, {
       method: 'DELETE',
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
   },
 };
 

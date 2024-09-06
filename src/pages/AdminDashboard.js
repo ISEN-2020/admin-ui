@@ -1,7 +1,6 @@
-// components/AdminDashboard.js
 import React, { useState, useEffect } from 'react';
 import bookService from '../services/bookService';
-import students from '../mock/students.json'; // Simulez des données utilisateurs
+import students from '../mock/students.json';
 import './AdminDashboard.css'; 
 
 const AdminDashboard = () => {
