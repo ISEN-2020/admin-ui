@@ -1,0 +1,116 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  justify-content: space-between; /* Distribue l'espace entre les éléments */
+  padding: 0 20px; /* Ajoute un peu de padding horizontal */
+}
+
+.dashboard-section {
+  padding: 0px 20px 20px 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Styles pour les sections de recherche */
+.search-books, .search-users {
+  position: relative;
+  max-width: 500px;
+  min-width: 500px;
+}
+
+/* Styles pour la section de gestion des livres */
+.manage-books {
+  background-color: #f4f4f4;
+  max-width: 400px; /* Largeur maximale de la section des livres */
+  width: 100%;
+}
+
+
+/* Pour centrer la section des livres */
+.dashboard-container > .search-books {
+  flex: 1;
+}
+
+.dashboard-container > .manage-books {
+  flex: 0 0 auto; /* Ne pas s'étirer ou rétrécir */
+}
+
+.dashboard-container > .search-users {
+  flex: 1;
+}
+
+/* Styles de l'en-tête collant */
+.sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1000;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sticky-header h3 {
+  color: #3751FE;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.sticky-header input,
+.sticky-header button {
+  margin: 10px 0;
+}
+
+.sticky-header input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: calc(100% - 120px);
+}
+
+.sticky-header button {
+  padding: 10px;
+  border: none;
+  background-color: #3751FE;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sticky-header button:hover {
+  background-color: #0044cc;
+}
+
+/* Styles pour les livres et les utilisateurs */
+.book-item, .user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.book-actions, .user-actions {
+  display: flex;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.book-actions button, .user-actions button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #3751FE;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-actions button:hover, .user-actions button:hover {
+  background-color: #0044cc;
+}
+
+.titleBook {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,5 @@
+[
+    { "id": 101, "title": "Book 1", "author": "Author A", "year": 2010, "available": false },
+    { "id": 102, "title": "Book 2", "author": "Author B", "year": 2015, "available": false },
+    { "id": 103, "title": "Book 3", "author": "Author C", "year": 2020, "available": true }
+]  

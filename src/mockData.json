@@ -1,0 +1,24 @@
+{
+  "books": [
+    { "id": "1", "title": "Book One", "author": "Author A" },
+    { "id": "2", "title": "Book Two", "author": "Author B" },
+    { "id": "3", "title": "Book Three", "author": "Author C" },
+    { "id": "4", "title": "Book One", "author": "Author A" },
+    { "id": "5", "title": "Book Two", "author": "Author B" },
+    { "id": "6", "title": "Book Three", "author": "Author C" },
+    { "id": "7", "title": "Book One", "author": "Author A" },
+    { "id": "8", "title": "Book Two", "author": "Author B" },
+    { "id": "9", "title": "Book Three", "author": "Author C" },
+    { "id": "10", "title": "Book One", "author": "Author A" },
+    { "id": "11", "title": "Book Two", "author": "Author B" },
+    { "id": "12", "title": "Book Three", "author": "Author C" }
+  ],
+  "borrowedBooks": [
+    { "id": "1", "title": "Book One", "borrowedBy": "User A", "returnDate": "2024-09-15" },
+    { "id": "2", "title": "Book Two", "borrowedBy": "User B", "returnDate": "2024-09-20" }
+  ],
+  "admins": [
+    { "id": "1", "name": "Admin One", "email": "admin1@example.com" },
+    { "id": "2", "name": "Admin Two", "email": "admin2@example.com" }
+  ]
+}

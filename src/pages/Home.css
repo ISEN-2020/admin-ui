@@ -1,0 +1,84 @@
+
+
+.container {
+  display: flex;
+  height: 100vh; /* Utiliser la hauteur de la fenêtre pour occuper tout l'écran */
+}
+
+.form-column, .image-column {
+  flex: 1; /* Chaque colonne occupe une part égale de l'espace */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-column {
+  background-color: #f4f4f4; /* Couleur de fond pour la colonne de formulaire */
+  padding: 20px;
+  flex-direction: column; /* Aligner les éléments verticalement */
+  display: flex; /* Assurer que le contenu est flex */
+}
+
+.header {
+  text-align: center; /* Centrer le texte */
+  margin-bottom: 20px; /* Espacer le titre du formulaire */
+}
+
+.header h2 {
+  color: #3751FE;
+  font-size: 44px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header p {
+  color: rgba(0, 0, 0, 0.60);
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.form {
+  display: flex;
+  flex-direction: column; /* Assurer que les éléments du formulaire sont alignés verticalement */
+  align-items: center;
+  width: 100%;
+}
+
+input, button {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.blue-btn {
+  background-color: #3751FE;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.blue-btn:hover {
+  background-color: #0044cc;
+}
+
+.image-column img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.white-btn {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.white-btn:hover {
+  background-color: #f1f1f1;
+}

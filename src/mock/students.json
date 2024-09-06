@@ -1,0 +1,18 @@
+[
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] },
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "borrowedBooks": [101, 102] },
+    { "id": 2, "name": "Jane Doe", "email": "jane@example.com", "borrowedBooks": [103] }
+]  

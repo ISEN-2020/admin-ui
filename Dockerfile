@@ -1,16 +1,25 @@
-# build environment
-FROM node:13.12.0-alpine as build
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-COPY . ./
-RUN npm run build
+# Base image
+FROM node:16-alpine
 
-# production environment
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Set working directory and change ownership
+WORKDIR /app
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Change ownership of the app files to non-root user
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose port and set the environment
+EXPOSE 3000
+ENV NODE_ENV=production
+
+# Start the application
+CMD ["npm", "start"]
