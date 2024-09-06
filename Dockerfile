@@ -1,25 +1,23 @@
-# Base image
-FROM node:16-alpine
-
-# Create non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
-# Set working directory and change ownership
+# Stage 1: Build the React app
+FROM node:lts as builder
 WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install --ignore-scripts
+
+# Copy the rest of the application code and build the app
 COPY . .
+RUN npm run build
 
-# Install dependencies
-RUN npm install
+# Stage 2: Create the production image
+FROM nginx:latest
 
-# Change ownership of the app files to non-root user
-RUN chown -R appuser:appgroup /app
+# Copy build artifacts from the builder stage
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Switch to non-root user
-USER appuser
+# Expose the default Nginx port
+EXPOSE 80
 
-# Expose port and set the environment
-EXPOSE 3000
-ENV NODE_ENV=production
-
-# Start the application
-CMD ["npm", "start"]
+# Run Nginx in the foreground as a non-root user
+CMD ["nginx", "-g", "daemon off;"]
