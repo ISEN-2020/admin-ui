@@ -1,8 +1,8 @@
 .dashboard-container {
   display: flex;
   height: 100vh;
-  justify-content: space-between; /* Distribue l'espace entre les éléments */
-  padding: 0 20px; /* Ajoute un peu de padding horizontal */
+  justify-content: space-between;
+  padding: 0 20px; 
 }
 
 .dashboard-section {
@@ -11,35 +11,31 @@
   overflow-y: auto;
 }
 
-/* Styles pour les sections de recherche */
 .search-books, .search-users {
   position: relative;
   max-width: 500px;
   min-width: 500px;
 }
 
-/* Styles pour la section de gestion des livres */
 .manage-books {
   background-color: #f4f4f4;
-  max-width: 400px; /* Largeur maximale de la section des livres */
+  max-width: 400px; 
   width: 100%;
 }
 
 
-/* Pour centrer la section des livres */
 .dashboard-container > .search-books {
   flex: 1;
 }
 
 .dashboard-container > .manage-books {
-  flex: 0 0 auto; /* Ne pas s'étirer ou rétrécir */
+  flex: 0 0 auto;
 }
 
 .dashboard-container > .search-users {
   flex: 1;
 }
 
-/* Styles de l'en-tête collant */
 .sticky-header {
   position: -webkit-sticky;
   position: sticky;
@@ -82,7 +78,6 @@
   background-color: #0044cc;
 }
 
-/* Styles pour les livres et les utilisateurs */
 .book-item, .user-item {
   display: flex;
   justify-content: space-between;

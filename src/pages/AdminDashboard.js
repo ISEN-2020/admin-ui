@@ -11,7 +11,6 @@ const AdminDashboard = () => {
   const [newBookAuthor, setNewBookAuthor] = useState('');
   const [editBook, setEditBook] = useState(null);
   
-  // Nouvel état pour gérer les utilisateurs
   const [users, setUsers] = useState([]);
   const [userSearchQuery, setUserSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
