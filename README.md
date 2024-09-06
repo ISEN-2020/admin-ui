@@ -6,6 +6,8 @@ Bienvenue dans le projet *Admin UI**. Ce projet est une application front-end co
 
 Dans ce projet, vous recupérer le fichier sur votre pc en faisant :
 
+Récupérer le tag image en le cherchant sur DockerHub : https://hub.docker.com/
+
 ### `docker pull enzo10villa/admin-ui-service:<tagImage>`
 
 Ensuite,
