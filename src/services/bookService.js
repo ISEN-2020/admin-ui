@@ -1,31 +1,47 @@
-const books = [
-  { id: 1, title: 'Book 1', author: 'Author 1', year: 2020 },
-  { id: 2, title: 'Book 2', author: 'Author 2', year: 2019 },
-];
+const API_URL = 'http://localhost:3000/api/books';
 
 const bookService = {
   getBooks: async () => {
-    return Promise.resolve(books);
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
   },
   addBook: async (newBook) => {
-    books.push(newBook);
-    return Promise.resolve(newBook);
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newBook),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
   },
   updateBook: async (updatedBook) => {
-    const index = books.findIndex(book => book.id === updatedBook.id);
-    if (index !== -1) {
-      books[index] = updatedBook;
-      return Promise.resolve(updatedBook);
+    const response = await fetch(`${API_URL}/${updatedBook.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedBook),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-    return Promise.reject(new Error('Book not found'));
+    return response.json();
   },
   deleteBook: async (bookId) => {
-    const index = books.findIndex(book => book.id === bookId);
-    if (index !== -1) {
-      books.splice(index, 1);
-      return Promise.resolve({ message: `Book ${bookId} deleted successfully` });
+    const response = await fetch(`${API_URL}/${bookId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-    return Promise.reject(new Error('Book not found'));
+    return response.json();
   },
 };
 

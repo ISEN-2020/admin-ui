@@ -18,9 +18,13 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await bookService.getBooks();
-      setBooks(response);
-      setFilteredBooks(response);
+      try {
+        const response = await bookService.getBooks();
+        setBooks(response);
+        setFilteredBooks(response);
+      } catch (error) {
+        console.error('Failed to fetch books', error);
+      }
     };
     fetchBooks();
     
@@ -49,15 +53,18 @@ const AdminDashboard = () => {
   const handleAddBook = async () => {
     if (newBookTitle && newBookAuthor) {
       const newBook = {
-        id: (books.length + 1).toString(),
         title: newBookTitle,
-        author: newBookAuthor
+        author: newBookAuthor,
       };
-      await bookService.addBook(newBook);
-      setBooks([...books, newBook]);
-      setFilteredBooks([...filteredBooks, newBook]);
-      setNewBookTitle('');
-      setNewBookAuthor('');
+      try {
+        const addedBook = await bookService.addBook(newBook);
+        setBooks([...books, addedBook]);
+        setFilteredBooks([...filteredBooks, addedBook]);
+        setNewBookTitle('');
+        setNewBookAuthor('');
+      } catch (error) {
+        console.error('Failed to add book', error);
+      }
     }
   };
 
@@ -70,23 +77,31 @@ const AdminDashboard = () => {
   const handleUpdateBook = async () => {
     if (editBook) {
       const updatedBook = { ...editBook, title: newBookTitle, author: newBookAuthor };
-      await bookService.updateBook(updatedBook);
-      const updatedBooks = books.map(book =>
-        book.id === editBook.id ? updatedBook : book
-      );
-      setBooks(updatedBooks);
-      setFilteredBooks(updatedBooks);
-      setEditBook(null);
-      setNewBookTitle('');
-      setNewBookAuthor('');
+      try {
+        const book = await bookService.updateBook(updatedBook);
+        const updatedBooks = books.map(b =>
+          b.id === editBook.id ? book : b
+        );
+        setBooks(updatedBooks);
+        setFilteredBooks(updatedBooks);
+        setEditBook(null);
+        setNewBookTitle('');
+        setNewBookAuthor('');
+      } catch (error) {
+        console.error('Failed to update book', error);
+      }
     }
   };
 
   const handleDeleteBook = async (bookId) => {
-    await bookService.deleteBook(bookId);
-    const updatedBooks = books.filter(book => book.id !== bookId);
-    setBooks(updatedBooks);
-    setFilteredBooks(updatedBooks);
+    try {
+      await bookService.deleteBook(bookId);
+      const updatedBooks = books.filter(book => book.id !== bookId);
+      setBooks(updatedBooks);
+      setFilteredBooks(updatedBooks);
+    } catch (error) {
+      console.error('Failed to delete book', error);
+    }
   };
 
   const handleDeleteUser = (userId) => {
