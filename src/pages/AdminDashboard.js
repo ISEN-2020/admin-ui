@@ -1,6 +1,7 @@
+// components/AdminDashboard.js
 import React, { useState, useEffect } from 'react';
-import mockData from '../mockData.json';
-import students from '../mock/students.json';
+import bookService from '../services/bookService';
+import students from '../mock/students.json'; // Simulez des données utilisateurs
 import './AdminDashboard.css'; 
 
 const AdminDashboard = () => {
@@ -16,8 +17,12 @@ const AdminDashboard = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    setBooks(mockData.books);
-    setFilteredBooks(mockData.books); 
+    const fetchBooks = async () => {
+      const response = await bookService.getBooks();
+      setBooks(response);
+      setFilteredBooks(response);
+    };
+    fetchBooks();
     
     setUsers(students);
     setFilteredUsers(students); 
@@ -41,13 +46,14 @@ const AdminDashboard = () => {
     setFilteredUsers(results);
   };
 
-  const handleAddBook = () => {
+  const handleAddBook = async () => {
     if (newBookTitle && newBookAuthor) {
       const newBook = {
         id: (books.length + 1).toString(),
         title: newBookTitle,
         author: newBookAuthor
       };
+      await bookService.addBook(newBook);
       setBooks([...books, newBook]);
       setFilteredBooks([...filteredBooks, newBook]);
       setNewBookTitle('');
@@ -61,12 +67,12 @@ const AdminDashboard = () => {
     setNewBookAuthor(book.author);
   };
 
-  const handleUpdateBook = () => {
+  const handleUpdateBook = async () => {
     if (editBook) {
+      const updatedBook = { ...editBook, title: newBookTitle, author: newBookAuthor };
+      await bookService.updateBook(updatedBook);
       const updatedBooks = books.map(book =>
-        book.id === editBook.id
-          ? { ...book, title: newBookTitle, author: newBookAuthor }
-          : book
+        book.id === editBook.id ? updatedBook : book
       );
       setBooks(updatedBooks);
       setFilteredBooks(updatedBooks);
@@ -76,7 +82,8 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDeleteBook = (bookId) => {
+  const handleDeleteBook = async (bookId) => {
+    await bookService.deleteBook(bookId);
     const updatedBooks = books.filter(book => book.id !== bookId);
     setBooks(updatedBooks);
     setFilteredBooks(updatedBooks);

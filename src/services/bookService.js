@@ -3,22 +3,29 @@ const books = [
   { id: 2, title: 'Book 2', author: 'Author 2', year: 2019 },
 ];
 
-const borrowedBooks = [
-  { id: 1, title: 'Book 1', dueDate: '2022-12-01' },
-];
-
 const bookService = {
   getBooks: async () => {
-    // Simulated API call for fetching books
     return Promise.resolve(books);
   },
-  borrowBook: async (bookId) => {
-    // Simulated API call for borrowing a book
-    return Promise.resolve({ message: `Book ${bookId} borrowed successfully` });
+  addBook: async (newBook) => {
+    books.push(newBook);
+    return Promise.resolve(newBook);
   },
-  getBorrowedBooks: async () => {
-    // Simulated API call for fetching borrowed books
-    return Promise.resolve(borrowedBooks);
+  updateBook: async (updatedBook) => {
+    const index = books.findIndex(book => book.id === updatedBook.id);
+    if (index !== -1) {
+      books[index] = updatedBook;
+      return Promise.resolve(updatedBook);
+    }
+    return Promise.reject(new Error('Book not found'));
+  },
+  deleteBook: async (bookId) => {
+    const index = books.findIndex(book => book.id === bookId);
+    if (index !== -1) {
+      books.splice(index, 1);
+      return Promise.resolve({ message: `Book ${bookId} deleted successfully` });
+    }
+    return Promise.reject(new Error('Book not found'));
   },
 };
 
