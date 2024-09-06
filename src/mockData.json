@@ -18,7 +18,6 @@
     { "id": "2", "title": "Book Two", "borrowedBy": "User B", "returnDate": "2024-09-20" }
   ],
   "admins": [
-    { "id": "1", "name": "Admin One", "email": "admin1@example.com" },
-    { "id": "2", "name": "Admin Two", "email": "admin2@example.com" }
+    { "id": "1", "name": "Admin", "email": "admin@example.com" }
   ]
 }
