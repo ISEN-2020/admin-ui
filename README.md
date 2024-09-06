@@ -12,6 +12,6 @@ Récupérer le dernier tag image en le cherchant sur DockerHub : https://hub.doc
 
 Ensuite,
 
-### `docker run -p 3000:80 enzo10villa/admin-ui-service:<tagImage>`
+### `docker run -p 3000:3000 enzo10villa/admin-ui-service:<tagImage>`
 
 L'image du conteneur sera ensuite disponible ici : http://localhost:3000/
