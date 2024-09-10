@@ -11,13 +11,13 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Create the production image
-FROM nginx:latest
+FROM nginxinc/nginx-unprivileged:latest
 
 # Copy build artifacts from the builder stage
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose the default Nginx port
-EXPOSE 80
+EXPOSE 8080
 
 # Run Nginx in the foreground as a non-root user
 CMD ["nginx", "-g", "daemon off;"]
