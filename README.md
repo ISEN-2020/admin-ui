@@ -2,20 +2,21 @@
 
 Bienvenue dans le projet *Admin UI**. Ce projet est une application front-end conçue pour gérer l'interface utilisateur de la bibliothèque.
 
-## Available Scripts
+## Déployer le Microservice
 
-Dans ce projet, vous recupérer le fichier sur votre pc en faisant :
+Assurez-vous d'avoir Docker installé sur votre machine.
 
-Récupérer le dernier tag image en le cherchant sur DockerHub : https://hub.docker.com/
+Récupérer l'image Docker depuis Docker Hub :
 
-### `docker pull enzo10villa/admin-ui-service:<tagImage>`
+### `docker pull enzo10villa/admin-ui-service:latest`
 
-Ensuite,
+Lancer le conteneur Docker avec l'image que vous venez de récupérer :
 
-### `docker run -p 3000:3000 enzo10villa/admin-ui-service:<tagImage>`
+### `docker run -p 4000:80 enzo10villa/admin-ui-service:latest`
 
-L'image du conteneur sera ensuite disponible ici : http://localhost:3000/
+Une fois le conteneur en cours d'exécution, vous pouvez accéder à l'UI Utilisateur localement en vous rendant à l'adresse suivante : http://localhost:4000/ ou http://127.0.0.1:4000/
 
+## Utilisateur de Connexion
 Pour accéder au tableau de bord administrateur, veuillez utiliser les informations de connexion simulées suivantes :
 
 Adresse e-mail : admin@example.com
