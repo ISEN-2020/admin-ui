@@ -1,6 +1,6 @@
 # Admin UI
 
-Bienvenue dans le projet *Admin UI**. Ce projet est une application front-end conçue pour gérer l'interface utilisateur de la bibliothèque.
+Bienvenue dans le projet *Admin UI*. Ce projet est une application front-end conçue pour gérer l'interface utilisateur de la bibliothèque.
 
 ## Déployer le Microservice
 
