@@ -15,6 +15,11 @@ const AdminDashboard = () => {
   const [userSearchQuery, setUserSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
 
+  const [newBookIsbn, setNewBookIsbn] = useState('');
+  const [newBookDescription, setNewBookDescription] = useState('');
+  const [newBookPublicationYear, setNewBookPublicationYear] = useState('');
+  const [newBookQuantity, setNewBookQuantity] = useState('');
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -50,22 +55,30 @@ const AdminDashboard = () => {
   };
 
   const handleAddBook = async () => {
-    if (newBookTitle && newBookAuthor) {
+    if (newBookIsbn && newBookTitle && newBookAuthor && newBookDescription && newBookPublicationYear && newBookQuantity) {
       const newBook = {
+        isbn: newBookIsbn,
         title: newBookTitle,
         author: newBookAuthor,
+        description: newBookDescription,
+        publicationYear: newBookPublicationYear,
+        quantity: newBookQuantity,
       };
       try {
         const addedBook = await bookService.addBook(newBook);
         setBooks([...books, addedBook]);
         setFilteredBooks([...filteredBooks, addedBook]);
+        setNewBookIsbn('');
         setNewBookTitle('');
         setNewBookAuthor('');
+        setNewBookDescription('');
+        setNewBookPublicationYear('');
+        setNewBookQuantity('');
       } catch (error) {
         console.error('Failed to add book', error);
       }
     }
-  };
+  };  
 
   const handleEditBook = (book) => {
     setEditBook(book);
@@ -75,7 +88,15 @@ const AdminDashboard = () => {
 
   const handleUpdateBook = async () => {
     if (editBook) {
-      const updatedBook = { ...editBook, title: newBookTitle, author: newBookAuthor };
+      const updatedBook = { 
+        ...editBook, 
+        isbn: newBookIsbn, 
+        title: newBookTitle, 
+        author: newBookAuthor, 
+        description: newBookDescription, 
+        publicationYear: newBookPublicationYear, 
+        quantity: newBookQuantity 
+      };
       try {
         const book = await bookService.updateBook(updatedBook);
         const updatedBooks = books.map(b =>
@@ -84,13 +105,17 @@ const AdminDashboard = () => {
         setBooks(updatedBooks);
         setFilteredBooks(updatedBooks);
         setEditBook(null);
+        setNewBookIsbn('');
         setNewBookTitle('');
         setNewBookAuthor('');
+        setNewBookDescription('');
+        setNewBookPublicationYear('');
+        setNewBookQuantity('');
       } catch (error) {
         console.error('Failed to update book', error);
       }
     }
-  };
+  };  
 
   const handleDeleteBook = async (bookId) => {
     try {
@@ -140,6 +165,12 @@ const AdminDashboard = () => {
         <div className="titleBook">
           <input
             type="text"
+            value={newBookIsbn}
+            onChange={(e) => setNewBookIsbn(e.target.value)}
+            placeholder="ISBN du Livre"
+          />
+          <input
+            type="text"
             value={newBookTitle}
             onChange={(e) => setNewBookTitle(e.target.value)}
             placeholder="Titre du Livre"
@@ -149,6 +180,24 @@ const AdminDashboard = () => {
             value={newBookAuthor}
             onChange={(e) => setNewBookAuthor(e.target.value)}
             placeholder="Auteur du Livre"
+          />
+          <input
+            type="text"
+            value={newBookDescription}
+            onChange={(e) => setNewBookDescription(e.target.value)}
+            placeholder="Description du Livre"
+          />
+          <input
+            type="number"
+            value={newBookPublicationYear}
+            onChange={(e) => setNewBookPublicationYear(e.target.value)}
+            placeholder="Année de Parution"
+          />
+          <input
+            type="number"
+            value={newBookQuantity}
+            onChange={(e) => setNewBookQuantity(e.target.value)}
+            placeholder="Quantité"
           />
           {editBook ? (
             <>
